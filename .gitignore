@@ -1,0 +1,26 @@
+# Xcode
+.DS_Store
+.swap
+.nib
+.idea/
+.idea
+
+build/
+
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.perspective
+*.xcworkspace
+*.pbxuser
+xcuserdata
+xcuserdata/
+*.xcuserdata
+UserInterfaceState.xcuserstate
+project.xcworkspace/
+CYZS.xcodeproj/xcuserdata/*
+CYZS.xcodeproj/project.xcworkspace/xcuerdata/*
+profile
+*.moved-aside
+DerivedData
