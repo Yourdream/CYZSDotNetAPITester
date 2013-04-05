@@ -111,7 +111,7 @@
 + (void)registerWithBlock:(void (^)(RequestStatusData *result))block {
     NSString *userAnonymousName = [NSString stringWithFormat:@"%d%@", arc4random() % 100000, [OpenUDID value]];
     NSMutableDictionary *paramDict = [NSMutableDictionary dictionary];
-    [paramDict safeSetObject:[NSString stringWithFormat:@"%@@cyzs.com", userAnonymousName] forKey:JSON_KEY_EMAIL];
+    [paramDict safeSetObject:[NSString stringWithFormat:@"TEST%@@cyzs.com", userAnonymousName] forKey:JSON_KEY_EMAIL];
     [paramDict safeSetObject:[userAnonymousName substringToIndex:20] forKey:JSON_KEY_NICKNAME];
     [paramDict safeSetObject:@"111111" forKey:JSON_KEY_PASSWORD];
     [paramDict safeSetObject:nil forKey:JSON_KEY_BIRTHDAY];

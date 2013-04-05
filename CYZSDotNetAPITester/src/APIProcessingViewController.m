@@ -86,7 +86,6 @@
     [self.startButton setEnabled:NO];
     [self.resetButton setEnabled:NO];
     self.index = 0;
-    [self.resultArray removeAllObjects];
     [self doNetworkRequestWithSelectors:self.selectorArray];
 }
 
@@ -94,6 +93,7 @@
     if (self.index >= [selectorArray count]) {
         [self.startButton setEnabled:YES];
         [self.resetButton setEnabled:YES];
+        [self showResult];
         return;
     }
     [CYZSDotNetAPIManager performSelector:[[selectorArray objectAtIndex:self.index] pointerValue] withObject:^(RequestStatusData *resultData){
@@ -116,6 +116,57 @@
     [self.tableView reloadData];
 }
 
+- (void)showResult {
+    NSInteger testCount = [self.resultArray count];
+    if (testCount == 0) {
+        return;
+    }
+    NSInteger perfectNum = 0;
+    NSInteger normalNum = 0;
+    NSInteger waitingNum = 0;
+    NSInteger failedNum = 0;
+    for (RequestStatusData *statusData in self.resultArray) {
+        if (statusData.resultId != 0) {
+            failedNum ++;
+            continue;
+        } else if (statusData.milliSeconds < 100) {
+            perfectNum ++;
+            continue;
+        } else if (statusData.milliSeconds < 1000) {
+            normalNum ++;
+            continue;
+        } else {
+            waitingNum ++;
+            continue;
+        }
+    }
+
+    CGFloat perfectRate = 100 * perfectNum / (float)testCount;
+    CGFloat normalRate = 100 * normalNum / (float)testCount;
+    CGFloat waitingRate = 100 * waitingNum / (float)testCount;
+    CGFloat failedRate = 100 * failedNum / (float)testCount;
+
+    NSString *resultStr = [NSString stringWithFormat:@"     Perfect(<100): %d (%.2f%%) \n     Normal(<1000): %d (%.2f%%) \n     Waiting(>1000): %d (%.2f%%) \n     Failed: %d (%.2f%%) \n", perfectNum, perfectRate, normalNum, normalRate, waitingNum, waitingRate, failedNum, failedRate];
+
+    UIAlertView *alert =   [[UIAlertView alloc] initWithTitle:@"Result Statistics"
+                                                      message:resultStr
+                                                     delegate:self
+                                            cancelButtonTitle:@"Done"
+                                            otherButtonTitles:nil];
+
+    for (UIView *subView in alert.subviews) {
+        if ([[subView class] isSubclassOfClass:[UILabel class]]) {
+            UILabel *label = (UILabel *) subView;
+            if ([label.text isEqualToString:@"Result Statistics"] == NO) {
+                label.textAlignment = NSTextAlignmentLeft;
+            }
+        }
+    }
+
+    [alert show];
+
+}
+
 
 #pragma mark - Network request and process
 
@@ -130,9 +181,9 @@
         [cell.textLabel setFont:[UIFont systemFontOfSize:11]];
     }
 
-    RequestStatusData *singleData =  (RequestStatusData *) [self.resultArray objectAtIndex:(NSUInteger) indexPath.row];
+    RequestStatusData *singleData = (RequestStatusData *) [self.resultArray objectAtIndex:(NSUInteger) indexPath.row];
 
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %d", singleData.requestMethod, (int) singleData.milliSeconds];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@      %dms", singleData.requestMethod, (int) singleData.milliSeconds];
 
     if (singleData.milliSeconds > 1000) {
         [cell.textLabel setTextColor:[UIColor redColor]];
@@ -172,10 +223,10 @@
     RequestStatusData *singleData =  (RequestStatusData *) [self.resultArray objectAtIndex:(NSUInteger) indexPath.row];
 
     if ([singleData.errorMessage length] != 0) {
-        UIAlertView *alert =   [[UIAlertView alloc] initWithTitle:@"错误信息"
+        UIAlertView *alert =   [[UIAlertView alloc] initWithTitle:@"Error Detail"
                                                           message:[NSString stringWithFormat:@"Code: %d  %@", singleData.resultId, singleData.errorMessage]
                                                          delegate:self
-                                                cancelButtonTitle:@"确定"
+                                                cancelButtonTitle:@"Done"
                                                 otherButtonTitles:nil];
         [alert show];
     }

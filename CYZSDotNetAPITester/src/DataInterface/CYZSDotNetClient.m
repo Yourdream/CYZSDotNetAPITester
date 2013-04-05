@@ -79,14 +79,8 @@ static NSString * const kAFAppDotNetAPIBaseURLString = API_BASE_URL;
                                                                       }
                                                                       failure:^(AFHTTPRequestOperation *operation1, NSError *error){
                                                                           if (failure) {
-                                                                              NSLog(@"request url = %@", operation1.request.URL.absoluteString);
-                                                                              NSMutableDictionary *details = [NSMutableDictionary dictionary];
-                                                                              [details setValue:@"您的网络不太给力哦"
-                                                                                         forKey:NSLocalizedDescriptionKey];
-                                                                              NSError *postError = [NSError errorWithDomain:error.domain
-                                                                                                                       code:error.code
-                                                                                                                   userInfo:details];
-                                                                              failure(operation1, postError);
+
+                                                                              failure(operation1, error);
                                                                           }
                                                                       }];
     [self enqueueHTTPRequestOperation:operation];
