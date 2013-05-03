@@ -109,7 +109,7 @@ static NSString * const kAFAppDotNetAPIBaseURLString = API_BASE_URL;
               }
               if (block) {
                   if ([resultDict isKindOfClass:[NSDictionary class]]) {
-                      statusData.resultId = [resultDict safeIntForKey:JSON_KEY_RESULT];
+                      statusData.errorMessage = [resultDict safeStringForKey:@"msg"];
                       block(statusData);
                   } else {
                       block(statusData);

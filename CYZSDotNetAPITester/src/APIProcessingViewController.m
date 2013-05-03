@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) UIButton *startButton;
 @property (nonatomic, strong) UIButton *resetButton;
+@property (nonatomic, strong) UIButton *resultButton;
 
 @end
 
@@ -69,8 +70,16 @@
     [self.resetButton  addTarget:self
                    action:@selector(resetPressed:)
          forControlEvents:UIControlEventTouchUpInside];
-    [self.resetButton  setFrame:CGRectMake(240, 10, 60, 30)];
+    [self.resetButton  setFrame:CGRectMake(130, 10, 60, 30)];
     [self.view addSubview:self.resetButton];
+
+    self.resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.resultButton  setTitle:@"RESULT" forState:UIControlStateNormal];
+    [self.resultButton  addTarget:self
+                          action:@selector(resultPressed:)
+                forControlEvents:UIControlEventTouchUpInside];
+    [self.resultButton  setFrame:CGRectMake(240, 10, 65, 30)];
+    [self.view addSubview:self.resultButton];
 
     self.selectorArray = [CYZSDotNetAPIManager createAPIFunctionsArray];
 }
@@ -114,6 +123,10 @@
     [self.resultArray removeAllObjects];
     self.index = 0;
     [self.tableView reloadData];
+}
+
+- (void)resultPressed:(id)sender {
+    [self showResult];
 }
 
 - (void)showResult {
@@ -187,6 +200,8 @@
 
     if (singleData.milliSeconds > 1000) {
         [cell.textLabel setTextColor:[UIColor redColor]];
+    } else if (singleData.milliSeconds < 100) {
+        [cell.textLabel setTextColor:[UIColor colorWithRed:69.0/288 green:139.0/255 blue:0 alpha:1]];
     } else {
         [cell.textLabel setTextColor:[UIColor blackColor]];
     }

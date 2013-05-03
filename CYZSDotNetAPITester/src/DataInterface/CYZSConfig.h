@@ -15,15 +15,15 @@
     #define API_BASE_URL                        @"http://apitest.yourdream.cc/"
     #define IMAGE_SERVER_URL                    @"http://test.image.yourdream.cc/"
 #else
-    #define API_URL                             @"http://cyzs.yourdream.cc/api.php"
-    #define API_BASE_URL                        @"http://cyzs.yourdream.cc/"
-    #define IMAGE_SERVER_URL                    @"http://image.yourdream.cc/"
+#define API_URL                             @"http://cyzs.yourdream.cc/api.php"
+#define API_BASE_URL                        @"http://cyzs.yourdream.cc/"
+#define IMAGE_SERVER_URL                    @"http://image.yourdream.cc/"
 #endif
 
 #define API_PATH                            @"api.php"
 
 #define CLIENT_VERSION                      @"2.2.0"
-#define API_VERSION                         @"1.7"
+#define API_VERSION                         @"2.0"
 
 #define ITUNES_URL                          @"https://itunes.apple.com/app/chuan-yi-zhu-shou-shi-shang/id577700263?ls=1&mt=8"
 #define ITUNES_EVALUATE_URL                 @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=577700263"
@@ -42,13 +42,15 @@
 #define USER_DEFAULTS_KEY_PASSWORD          @"password"
 #define USER_DEFAULTS_KEY_NEW_VERSION       @"newVersion"  //新的版本号
 #define USER_DEFAULTS_KEY_CAMERA_TYPE       @"cameraType"  //拍照时摄像头状态，是前置还是后置摄像头
+#define USER_DEFAULTS_KEY_ANONYMOUS_FAILED  @"USER_DEFAULTS_KEY_ANONYMOUS_FAILED"
+
 #define USER_DEFAULTS_KEY_ANONYMOUS_HAPPENED @"USER_DEFAULTS_KEY_ANONYMOUS_HAPPENED"
 
 #pragma mark - NSNotificationCenter Names
 #define NETWORK_CONNECTION_ERROR            @"NETWORK_CONNECTION_ERROR"
 //tutorial key
 #define TUTORIAL_HAVE_POSTED_IMPRESS        @"TUTORIAL_HAVE_POSTED_IMPRESS"
-#define TUTORIAL_DESIGN_COUNT_is_0          @"TUTORIAL_DESIGN_COUNT_is_0" 
+#define TUTORIAL_DESIGN_COUNT_is_0          @"TUTORIAL_DESIGN_COUNT_is_0"
 #define TUTORIAL_DESIGN_COUNT_is_1          @"TUTORIAL_DESIGN_COUNT_is_1"
 #define TUTORIAL_HAVE_RECORDED_DIARY        @"TUTORIAL_HAVE_RECORDED_DIARY"
 
@@ -104,12 +106,11 @@
 #define REQUEST_METHOD_FEEDBACK_GETLIST     @"feedback.getList"
 
 // logout
-#define REQUEST_METHOD_LOGOUT               @"user.logout"   
+#define REQUEST_METHOD_LOGOUT               @"user.logout"
 
 //同步数据
-#define REQUEST_METHOD_ALL_DIARYIDS         @"feed.getFeedIds"
-#define REQUEST_METHOD_DDFEEDDETAIL         @"feed.getListByFeedIds"
-#define REQUEST_METHOD_GETTAGS              @"feed.getTags"
+#define REQUEST_METHOD_GETTAGS              @"tag.getList"
+#define REQUEST_METHOD_GETADVERTISEMENT     @"tag.getAdvertisement"
 
 // register
 #define REQUEST_METHOD_RESIGSTER            @"user.register"
@@ -121,10 +122,39 @@
 #define REQUEST_METHOD_SOCIAL_GETFANSLIST   @"social.getFansList"
 #define REQUEST_METHOD_SOCIAL_GETFOLLOWLIST @"social.getFollowList"
 
+//social
+#define REQUEST_METHOD_SOCIAL_GETSTATUSLIST             @"social.getStatusList"
+#define REQUEST_METHOD_SOCIAL_GETUNREADSTATUSCOUNT      @"social.getUnreadStatusCount"
+
+//suit
+#define REQUEST_METHOD_SUIT_ALLIDS          @"suit.getAllSuitIds"
+#define REQUEST_METHOD_SUIT_INFOBYIDS       @"suit.getInfoByIds"
+#define REQUEST_METHOD_SUIT_GETLIST         @"suit.getList"
+#define REQUEST_METHOD_SUIT_SET             @"suit.set"
+#define REQUEST_METHOD_SUIT_DELETE          @"suit.delete"
+#define REQUEST_METHOD_SUIT_SHARE           @"suit.share"
+#define REQUEST_METHOD_SUIT_GETHOT          @"suit.getHot"
+#define REQUEST_METHOD_SUIT_GETINFO         @"suit.getInfo"
+#define REQUEST_METHOD_SUIT_COMMENT_LIST    @"suit.getCommentList"
+#define REQUEST_METHOD_SUIT_COLLECT_USER_LIST    @"suit.getCollectUserList"
+#define REQUEST_METHOD_SUIT_GETNEW          @"suit.getNew"
+#define REQUEST_METHOD_SUIT_COMMENT         @"suit.comment"
+#define REQUEST_METHOD_SUIT_COLLECT         @"suit.collectSuit"
+#define REQUEST_METHOD_SUIT_DECOLLECT       @"suit.decollectSuit"
+#define REQUEST_METHOD_SUIT_COLLECT_LIST    @"suit.getCollectSuitList"
+
+//goods
+#define REQUEST_METHOD_GOODS_GETLISTBYTAG   @"goods.getListByTag"
+#define REQUEST_METHOD_GOODS_GETLIST        @"goods.getList"
+#define REQUEST_METHOD_GOODS_GETINFO        @"goods.getInfo"
+#define REQUEST_METHOD_GOODS_COLLECT        @"goods.collect"
+#define REQUEST_METHOD_GOODS_DECOLLECT      @"goods.decollect"
+#define REQUEST_METHOD_GOODS_GETCOLLECTLIST @"goods.getCollectList"
+#define REQUEST_METHOD_GOODS_SHARE          @"goods.share"
+
 //user pic
-#define REQUEST_METHOD_FEEDSET              @"diary.set"
+
 #define REQUEST_METHOD_FEEDSHARE            @"diary.share"
-#define REQUEST_METHOD_FEEDDELETE           @"diary.delete"
 #define REQUEST_METHOD_DIARY_GETLIST        @"diary.getList"
 
 //dress impress
@@ -146,6 +176,11 @@
 #define REQUEST_METHOD_GETUNREADNOTIFY      @"user.getUnreadNotify"
 #define REQUEST_METHOD_READ_NOTIFY          @"notify.read"
 #define REQUEST_METHOD_RESET_NOTIFY         @"user.resetNotify"
+#define REQUEST_METHOD_NOTIFY_GETANTI       @"notify.getAntiDisturb"
+#define REQUEST_METHOD_NOTIFY_SETANTI       @"notify.setAntiDisturb"
+
+//style
+#define REQUEST_METHOD_STYLE_GETHOT         @"style.getHot"
 
 #define REQUEST_METHOD_GET_ADVERTISEMENT    @"advertisement.get"
 
@@ -157,20 +192,21 @@
 #define REQUEST_METHOD_MEDIA_REMOVECOLLECT  @"media.removeCollect"
 #define REQUEST_METHOD_COLLECT_LIST         @"media.getCollectList"
 #define REQUEST_METHOD_MEDIA_SHARE          @"media.share"
-#define REQUEST_METHOD_GET_TAG_GOODS        @"media.getGoodsByTag"
 #define REQUEST_METHOD_GET_HOT_TAG_GOODS    @"media.getGoodsByTagSortByCollectCount"
 #define REQUEST_METHOD_GET_SUIT_GOODS       @"media.getGoodsListBySuitId"
 #define REQUEST_METHOD_GET_SUIT_LIST        @"media.getSuitList"
 #define REQUEST_METHOD_GET_SUIT_COMMENT     @"media.getSuitCommentList"
 #define REQUEST_METHOD_COMMENT_SUIT         @"media.commentSuit"
-#define REQUEST_METHOD_SUIT_COLLECT         @"media.collectSuit"
-#define REQUEST_METHOD_SUIT_SHARE           @"media.shareSuit"
+#define REQUEST_METHOD_MEDIA_SUIT_COLLECT   @"media.collectSuit"
+#define REQUEST_METHOD_MEDIASUIT_SHARE      @"media.shareSuit"
 #define REQUEST_METHOD_SUIT_REMOVECOLLECT   @"media.removeCollectSuit"
 #define REQUEST_METHOD_COLLECT_SUIT_LIST    @"media.getCollectSuitList"
 #define REQUEST_METHOD_COMMENT_MEDIA        @"media.commentMedia"
 #define REQUEST_METHOD_GET_MEDIA_COMMENT    @"media.getCommentList"
 #define REQUEST_METHOD_MEDIA_HOT_LIST       @"media.getHotPfeedList"
 #define REQUEST_METHOD_MEDIA_NEW_LIST       @"media.getNewlyPfeedList"
+#define REQUEST_METHOD_MEDIA_HOT_SUIT_LIST  @"media.getHotSuitList"
+#define REQUEST_METHOD_MEDIA_NEW_SUIT_LIST  @"media.getNewlySuitList"
 
 //hot tag
 #define REQUEST_METHOD_HOT_TAGS             @"tag.getHotList"
@@ -188,7 +224,7 @@
 #define REQUEST_METHOD_TALENT_DAILY_LIST    @"talent.getDailyRecommendList"
 
 // weibo
-#define REQUEST_METHOD_IMPRESSSHARE         @"pfeed.share"
+
 #define REQUEST_METHOD_APPSSHARE            @"platform.share"
 #define BIND_APP_SUCCESS                    @"BIND_APP_SUCCESS"
 #define BIND_APP_FAILED                     @"BIND_APP_FAILED"
@@ -266,14 +302,13 @@
 #define JSON_KEY_TALENT_JOINTIME            @"beTalentTime"
 #define JSON_KEY_TALENT_SCORE               @"score"
 #define JSON_KEY_TALENT_GOODCOUNT           @"goodCount"
-#define JSON_KEY_TALENT_DIARYCOUNT          @"diaryCount"
-#define JSON_KEY_TALENT_PFEEDCOUNT          @"pfeedCount"
+#define JSON_KEY_TALENT_SUITCOUNT           @"suitCount"
 #define JSON_KEY_TALENT_COMMENTCOUNT        @"commentCount"
 #define JSON_KEY_TALENT_VOTECOUNT           @"voteCount"
 #define JSON_KEY_TALENT_REGISTERTIME        @"registerTime"
 #define JSON_KEY_TALENT_FANSCOUNT           @"fansCount"
-#define JSON_KEY_TALENT_PFEEDNEWLIST        @"newPfeedList"
-#define JSON_KEY_TALENT_PFEEDHOTLIST        @"hotPfeedList"
+#define JSON_KEY_TALENT_SUITNEWLIST         @"newSuitList"
+#define JSON_KEY_TALENT_SUITHOTLIST         @"hotSuitList"
 #define JSON_KEY_TALENT_IMAGE               @"image"
 #define JSON_KEY_TALENT_STYLE               @"style"
 #define JSON_KEY_TALENT_ROLE                @"role"
@@ -285,8 +320,8 @@
 #define JSON_KEY_PIC_HEIGHT                 @"picHeight"
 
 #define JSON_KEY_DIARY_ID                   @"feedId"
-#define JSON_KEY_DIARY_ALLIDS               @"feedIds"
-#define JSON_KEY_DIARY_IMAGEFILE            @"image"
+#define JSON_KEY_SUIT_ALLIDS                @"suitIds"
+#define JSON_KEY_SUIT_IMAGEFILE             @"image"
 #define JSON_KEY_DIARY_CONTENT              @"content"
 #define JSON_KEY_DIARY_TAGS                 @"tag"
 #define JSON_KEY_DIARY_COLORIDS             @"colors"
@@ -296,7 +331,7 @@
 #define JSON_KEY_DIARY_ISPRIVATE            @"isPrivate"
 #define JSON_KEY_DIARY_MEDIAID              @"mediaId"
 #define JSON_KEY_DIARY_ISHOT                @"isHot"
-#define JSON_KEY_DIARY_PLATFORMIDS          @"shareToPlatformIds"
+#define JSON_KEY_SUIT_PLATFORMIDS           @"shareToPlatformIds"
 #define JSON_KEY_DIARY_PAGE                 @"page"
 #define JSON_KEY_DIARY_PAGESIZE             @"pageSize"
 #define JSON_KEY_DIARY_STATUS               @"status"
@@ -358,6 +393,13 @@
 #define JSON_KEY_NOTIFY_NOTICEID            @"noticeId"
 #define JSON_KEY_NOTIFY_ISREAD              @"isRead"
 
+#define JSON_KEY_NOTIFY_ISRECEIVEOFFICIAL   @"isReceiveOfficial"
+#define JSON_KEY_NOTIFY_ISRECEIVECOMMENT    @"isReceiveComment"
+#define JSON_KEY_NOTIFY_ISRECEIVEFANS       @"isReceiveNewFans"
+#define JSON_KEY_NOTIFY_ISANTIDISTURB       @"isAntiDisturb"
+#define JSON_KEY_NOTIFY_STARTTIME           @"startTime"
+#define JSON_KEY_NOTIFY_ENDTIME             @"endTime"
+
 #define JSON_KEY_NOTIFY_PFEEDID             @"pfeedId"
 #define JSON_KEY_NOTIFY_FUSERID             @"userId"
 #define JSON_KEY_NOTIFY_MEDIAID             @"mediaId"
@@ -377,6 +419,9 @@
 #define JSON_KEY_EXPRESS_CREATETIME         @"publishTime"
 #define JSON_KEY_EXPRESS_MEDIAID            @"mediaId"
 #define JSON_KEY_EXPRESS_HAVE_READ          @"haveRead"
+
+#define JSON_KEY_EXPRESS_TYPE               @"type"
+#define JSON_KEY_EXPRESS_PARSELINK          @"link"
 
 #define JSON_KEY_ADV_LATEST                 @"latestAdvertisement"
 #define JSON_KEY_ADV_IMAGE                  @"image"
@@ -407,35 +452,69 @@
 #define JSON_KEY_MEDIA_PFEEDLIST            @"pfeedList"
 #define JSON_KEY_MEDIA_COMMENT              @"comment"
 
-
+#define JSON_KEY_SUIT_SUITLIST              @"suitList"
+#define JSON_KEY_SUIT_USERID                @"userId"
 #define JSON_KEY_SUIT_SUITID                @"suitId"
-#define JSON_KEY_SUIT_MEDIAID               @"mediaId"
-#define JSON_KEY_SUIT_CONTENT               @"content"
 #define JSON_KEY_SUIT_IMAGE                 @"image"
-#define JSON_KEY_SUIT_STYLE                 @"style"
-#define JSON_KEY_SUIT_COLLECTCOUNT          @"collectCount"
-#define JSON_KEY_SUIT_COMMENTCOUNT          @"commentCount"
-#define JSON_KEY_SUIT_SORT                  @"sort"
-#define JSON_KEY_SUIT_CREATETIME            @"createTime"
-#define JSON_KEY_SUIT_PUBLISHTIME           @"publishTime"
 #define JSON_KEY_SUIT_IMAGE_HEIGHT          @"height"
 #define JSON_KEY_SUIT_IMAGE_WIDTH           @"width"
-#define JSON_KEY_SUIT_GOODS                 @"goods"
+#define JSON_KEY_SUIT_CONTENT               @"content"
+#define JSON_KEY_SUIT_ISPRIVATE             @"isPrivate"
+#define JSON_KEY_SUIT_READCOUNT             @"readCount"
+#define JSON_KEY_SUIT_COLLECTCOUNT          @"collectCount"
+#define JSON_KEY_SUIT_COMMENTCOUNT          @"commentCount"
+#define JSON_KEY_SUIT_ISHOT                 @"isHot"
+#define JSON_KEY_SUIT_MEDIAID               @"mediaId"
+#define JSON_KEY_SUIT_CREATETIME            @"created"
+#define JSON_KEY_SUIT_UPDATETIME            @"updated"
+#define JSON_KEY_SUIT_PUBLISHTIME           @"publishTime"
+#define JSON_KEY_SUIT_COLORS                @"colors"
+#define JSON_KEY_SUIT_TAGS                  @"tags"
+#define JSON_KEY_SUIT_STYLE                 @"style"
+#define JSON_KEY_SUIT_SUBJECT_NAME          @"mediaSubject"
+#define JSON_KEY_SUIT_GOODSCOUNT            @"goodsCount"
+#define JSON_KEY_SUIT_USERNAME              @"username"
+#define JSON_KEY_SUIT_AVATAR                @"avatar"
+#define JSON_KEY_SUIT_ISTALENT              @"isTalent"
 #define JSON_KEY_SUIT_ISCOLLECTED           @"isCollected"
+#define JSON_KEY_SUIT_GOODS                 @"goods"
+#define JSON_KEY_SUIT_COMMENT_LIST          @"commentList"
+#define JSON_KEY_SUIT_COLLECT_LIST          @"collectList"
+#define JSON_KEY_SUIT_NEEDCOMMENTCOUNT      @"needCommentCount"
+#define JSON_KEY_SUIT_NEEDCOLLECTCOUNT      @"needCollectCount"
+
+#define JSON_KEY_SUIT_SORT                  @"sort"
+
 #define JSON_KEY_SUIT_COMMENT               @"comment"
 #define JSON_KEY_SUIT_ISDATASHOW            @"isDataShow"
 
-#define JSON_KEY_GOODS_GOODSID              @"goodsId"
+
+#define JSON_KEY_GOODS_GOODSID              @"outerGoodsId"
+#define JSON_KEY_GOODS_CONTENT              @"content"
+#define JSON_KEY_GOODS_MONTHLYSOLD          @"soldInOuter"
+#define JSON_KEY_GOODS_CATEGORYID           @"categoryId"
+#define JSON_KEY_GOODS_PRICE                @"price"
+#define JSON_KEY_GOODS_IMAGE_WIDTH          @"width"
+#define JSON_KEY_GOODS_IMAGE_HEIGHT         @"height"
+#define JSON_KEY_GOODS_ISCOLLECTED          @"isCollected"
+#define JSON_KEY_GOODS_NAME                 @"outerName"
+#define JSON_KEY_GOODS_IMAGE                @"image"
+#define JSON_KEY_GOODS_BUYLINK              @"buyLink"
+#define JSON_KEY_GOODS_SUITS                @"suits"
+#define JSON_KEY_GOODS_TAG                  @"tag"
+#define JSON_KEY_GOODS_ISHOTSORT            @"isHotSort"
+#define JSON_KEY_GOODS_GOODSLIST            @"goodsList"
+#define JSON_KEY_GOODS_COLLECTCOUNT         @"collectCount"
+
+
 #define JSON_KEY_GOODS_MEDIAID              @"mediaId"
 #define JSON_KEY_GOODS_SUITID               @"suitId"
-#define JSON_KEY_GOODS_CATEGORYID           @"categoryId"
-#define JSON_KEY_GOODS_BUYLINK              @"buyLink"
 #define JSON_KEY_GOODS_TAOBAOLINK           @"taobaoLink"
 #define JSON_KEY_GOODS_ISORIGINIMAGE        @"isOriginImage"
-#define JSON_KEY_GOODS_ISCOLLECTED          @"isCollected"
-#define JSON_KEY_GOODS_PRICE                @"price"
-#define JSON_KEY_GOODS_IMAGE                @"image"
-#define JSON_KEY_GOODS_NAME                 @"name"
+
+
+
+
 #define JSON_KEY_COLLECT_GOODS_NAME         @"goodsName"
 #define JSON_KEY_GOODS_SORT                 @"sort"
 #define JSON_KEY_GOODS_TAGS                 @"tags"
@@ -492,5 +571,22 @@ typedef enum profileViewCurrentCellType{
     profileViewCurrentCellTypeSuitCollect =3,
     profileViewCurrentCellTypeUserInfo = 4
 }profileViewCurrentCellType;
+
+typedef enum _DataSourceType {
+    DataSourceTypeNew = 0,
+    DataSourceTypeHot
+} DataSourceType;
+
+
+//Google Analytics
+#define GA_Catogory_Impress     @"搭配"
+#define GA_Catogory_Shopping    @"逛街"
+#define GA_Catogory_Subject     @"主题"
+#define GA_Catogory_Talent      @"达人"
+#define GA_Catogory_Profile     @"用户"
+
+#define GA_EVENT_CLICK          @"点击"
+#define GA_EVENT_LOAD           @"加载"
+
 
 #endif

@@ -22,6 +22,7 @@
 		62370889D2932B4F1606F652 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6237047364A48B63C33BDEDC /* AFNetworkActivityIndicatorManager.m */; };
 		62370C569045E69B775EAFEC /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6237088FCB3F985A34AF4C0C /* AFPropertyListRequestOperation.m */; };
 		62370D1436AB1C49A58F1575 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 6237025D5586581316D4BD96 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		62370E94220B3351348819E9 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 62370BA2FA6DA72D68317D23 /* test.png */; };
 		62370EF748B52636DBAAF495 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 62370E50FF64735E70472500 /* UIImageView+AFNetworking.m */; };
 		62370F31818C883ACAA57BF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 623708946AB6253CB3755422 /* AppDelegate.m */; };
 		D0726AFF170D26480063EFD9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0726AFE170D26480063EFD9 /* UIKit.framework */; };
@@ -60,6 +61,7 @@
 		623709F0A31C551E6024AE35 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
 		623709FC29DFE87B2A194CD2 /* CYZSTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYZSTimer.h; sourceTree = "<group>"; };
 		62370AE1AEA9D05C43672555 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
+		62370BA2FA6DA72D68317D23 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		62370BE56B7AD6038DEB881C /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageRequestOperation.h; sourceTree = "<group>"; };
 		62370C1779A44625431075A9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		62370C2FC4B3C792208A617B /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			children = (
 				D0726B05170D26480063EFD9 /* Supporting Files */,
 				62370FC3180500A3A5F1F575 /* src */,
+				62370BA2FA6DA72D68317D23 /* test.png */,
 			);
 			path = CYZSDotNetAPITester;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				D0726B11170D26480063EFD9 /* Default.png in Resources */,
 				D0726B13170D26480063EFD9 /* Default@2x.png in Resources */,
 				D0726B15170D26480063EFD9 /* Default-568h@2x.png in Resources */,
+				62370E94220B3351348819E9 /* test.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
