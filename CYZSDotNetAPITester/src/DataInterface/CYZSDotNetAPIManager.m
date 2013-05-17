@@ -328,7 +328,7 @@
 
 
     RequestStatusData *statusData = [[RequestStatusData alloc] init];
-    statusData.requestMethod = REQUEST_METHOD_RESIGSTER;
+    statusData.requestMethod = REQUEST_METHOD_SUIT_SET;
     CYZSTimer *timer = [[CYZSTimer alloc] init];
     [timer startTimer];
 
